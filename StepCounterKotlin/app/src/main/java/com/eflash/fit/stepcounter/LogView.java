@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.gms.fit.samples.common.logger;
+package com.eflash.fit.stepcounter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,7 +22,7 @@ import android.widget.TextView;
 
 /** Simple TextView which is used to output log data received through the LogNode interface.
 */
-public class LogView extends TextView implements LogNode {
+public class LogView extends androidx.appcompat.widget.AppCompatTextView implements LogNode {
 
     public LogView(Context context) {
         super(context);

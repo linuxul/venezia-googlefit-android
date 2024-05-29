@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.google.android.gms.fit.samples.stepcounterkotlin
+package com.eflash.fit.stepcounter
 
 import android.Manifest
 import android.content.Intent
@@ -29,10 +29,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.TextViewCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.fit.samples.common.logger.Log
-import com.google.android.gms.fit.samples.common.logger.LogView
-import com.google.android.gms.fit.samples.common.logger.LogWrapper
-import com.google.android.gms.fit.samples.common.logger.MessageOnlyLogFilter
 import com.google.android.gms.fitness.Fitness
 import com.google.android.gms.fitness.FitnessOptions
 import com.google.android.gms.fitness.data.DataType
@@ -289,21 +285,20 @@ class MainActivity : AppCompatActivity() {
                 // when permissions are denied. Otherwise, your app could appear unresponsive to
                 // touches or interactions which have required permissions.
 
-                Snackbar.make(
-                        findViewById(R.id.main_activity_view),
-                        R.string.permission_denied_explanation,
-                        Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.settings) {
-                            // Build intent that displays the App settings screen.
-                            val intent = Intent()
-                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                            val uri = Uri.fromParts("package",
-                                    BuildConfig.APPLICATION_ID, null)
-                            intent.data = uri
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                            startActivity(intent)
-                        }
-                        .show()
+//                Snackbar.make(
+//                        findViewById(R.id.main_activity_view),
+//                        R.string.permission_denied_explanation,
+//                        Snackbar.LENGTH_INDEFINITE)
+//                        .setAction(R.string.settings) {
+//                            // Build intent that displays the App settings screen.
+//                            val intent = Intent()
+//                            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+//                            val uri = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+//                            intent.data = uri
+//                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+//                            startActivity(intent)
+//                        }
+//                        .show()
             }
         }
     }

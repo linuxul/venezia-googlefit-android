@@ -1,52 +1,50 @@
-Step Counter
+스텝 카운터
 ============
 
-A simple example of how to record steps and read them back.
+단계를 기록하고 다시 읽는 방법에 대한 간단한 예입니다.
 
-Introduction
+소개
 ------------
 
-Pre-requisites
+전제조건
 --------------
 
-- Android API Level >= 14
-- Android Build Tools v29
-- Android Support Repository
-- Register a Google Project with an Android client per getting started instructions
+- Android API 레벨 >= 14
+- Android 빌드 도구 v29
+- 안드로이드 지원 저장소
+- 시작 지침에 따라 Android 클라이언트에 Google 프로젝트 등록
   http://developers.google.com/fit/android/get-started
 
-Getting Started
+시작하기
 ---------------
-This sample uses the Gradle build system. To build this project, use the
-"gradlew build" command or use "Import Project" in Android Studio.
+이 샘플은 Gradle 빌드 시스템을 사용합니다. 이 프로젝트를 구축하기 위해서는
+"gradlew build" 명령을 수행하거나 Android Studio에서 "Import Project"를 사용합니다.
 
-NOTE: You must register an Android client underneath a Google Project in order for the Google Fit
-API to become available for your app. The process ensures your app has proper consent screen
-information for users to accept, among other things required to access Google APIs.
-See the instructions for more details: http://developers.google.com/fit/android/get-started
+참고: Google Fit을 사용하려면 Google 프로젝트 아래에 Android 클라이언트를 등록해야 합니다
+API는 앱에서 사용할 수 있습니다. 이 과정은 앱에 적절한 동의 화면이 있는지 확인합니다
+구글 API에 액세스하기 위해 필요한 것들 중 사용자가 수용할 수 있는 정보.
+자세한 내용은 설명서를 참조하십시오. http://developers.google.com/fit/android/get-started
 
-Support
+지지해요
 -------
 
-The most common problem using these samples is a SIGN_IN_FAILED exception. Users can experience
-this after selecting a Google Account to connect to the Fit API. Errors will be visible in logcat.
+이 샘플들을 사용하는 가장 일반적인 문제는 SIGN_IN_FAILED 예외입니다. 사용자가 경험할 수 있는
+Fit API에 연결할 Google 계정을 선택한 후 logcat에 오류가 표시됩니다.
 
-If you encounter this error, check the following steps:
+이 오류가 발생하면 다음 단계를 확인합니다:
 
-1.  Follow the instructions at http://developers.google.com/fit/android/get-started for registering an Android client.
-1.  Ensure that the [Fit API](https://console.developers.google.com/apis/api/fitness.googleapis.com/overview) is enabled for your Cloud project.
-1.  Check your [credentials](https://console.developers.google.com/apis/api/fitness.googleapis.com/credentials) for your Cloud project:
-    - Ensure that your **package name** for your credentials matches the sample.
-    - Ensure the **package name** matches the `applicationId` in the `app/build.gradle` file.
-    - Ensure the **Signing-certificate fingerprint** is entered correctly.
+1. Android 클라이언트를 등록하려면 http://developers.google.com/fit/android/get-started 의 지침을 따릅니다.
+1. 클라우드 프로젝트에 [Fit API](https://console.developers.google.com/apis/api/fitness.googleapis.com/overview) 가 활성화되어 있는지 확인합니다.
+1. 클라우드 프로젝트에 대해 [cred 자격 증명](https://console.developers.google.com/apis/api/fitness.googleapis.com/credentials) 을 확인하십시오:
+- 자격 증명의 ** 패키지 이름**가 샘플과 일치하는지 확인합니다.
+- **package name**가 'app/build.gradle' 파일의 'applicationId'와 일치하는지 확인합니다.
+- **Signing-Certificate fingerprint**가 올바르게 입력되었는지 확인합니다.
 
-Use the following channels for support:
+지원을 위해 다음 채널을 사용합니다:
 
-- Stack Overflow: http://stackoverflow.com/questions/tagged/android
+- 스택 오버플로: http://stackoverflow.com/questions/tagged/android
 
-If you've found an error in this sample, please file an issue:
+이 샘플에서 오류를 발견한 경우 다음과 같은 문제를 제기하십시오:
 https://github.com/android/fit
 
-Patches are encouraged, and may be submitted according to the instructions in CONTRIB.md.
-
-
+패치는 권장되며 CONTRIB.md 의 지침에 따라 제출할 수 있습니다.
