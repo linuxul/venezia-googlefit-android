@@ -32,10 +32,5 @@ limitations under the License.
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/title_text_view">
-        <com.google.android.gms.fit.samples.common.logger.LogView
-            android:id="@+id/sample_logview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical" />
     </ScrollView>
 </RelativeLayout>
