@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import androidx.core.app.ActivityCompat
 import androidx.core.widget.TextViewCompat
 import com.eflash.venezia.googlefit.databinding.ActivityMainBinding
@@ -55,6 +56,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // This method sets up our custom logger, which will print all log messages to the device
         // screen, as well as to adb logcat.
+
+        // 버튼 찾기
+        val buttonStartWeb = findViewById<Button>(R.id.button_start_web)
+        // 버튼 클릭 리스너 설정
+        buttonStartWeb.setOnClickListener {
+
+            fitSignIn(FitActionRequestCode.READ_DATA)
+        }
+
         initializeLogging()
 
         checkPermissionsAndRun(FitActionRequestCode.SUBSCRIBE)
@@ -222,17 +232,21 @@ class MainActivity : AppCompatActivity() {
         requestCode.let {
             if (shouldProvideRationale) {
                 // Log.i(TAG, "Displaying permission rationale to provide additional context.")
-                Snackbar.make(
-                    findViewById(R.id.main_activity_view),
-                    R.string.permission_rationale,
-                    Snackbar.LENGTH_INDEFINITE)
-                    .setAction(R.string.ok) {
-                        // Request permission
-                        ActivityCompat.requestPermissions(this,
-                            arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
-                            requestCode.ordinal)
-                    }
-                    .show()
+                ActivityCompat.requestPermissions(this,
+                    arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+                    requestCode.ordinal)
+                
+//                Snackbar.make(
+//                    findViewById(R.id.main_activity_view),
+//                    R.string.permission_rationale,
+//                    Snackbar.LENGTH_INDEFINITE)
+//                    .setAction(R.string.ok) {
+//                        // Request permission
+//                        ActivityCompat.requestPermissions(this,
+//                            arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
+//                            requestCode.ordinal)
+//                    }
+//                    .show()
             } else {
                 // Log.i(TAG, "Requesting permission")
                 // Request permission. It's possible this can be auto answered if device policy
