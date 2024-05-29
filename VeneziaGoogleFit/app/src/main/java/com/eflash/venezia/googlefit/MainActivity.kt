@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        DLog.v("+")
+
         setContentView(R.layout.activity_main)
         // This method sets up our custom logger, which will print all log messages to the device
         // screen, as well as to adb logcat.
@@ -61,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         val buttonStartWeb = findViewById<Button>(R.id.button_start_web)
         // 버튼 클릭 리스너 설정
         buttonStartWeb.setOnClickListener {
+            DLog.v("+")
 
             fitSignIn(FitActionRequestCode.READ_DATA)
         }
@@ -71,6 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkPermissionsAndRun(fitActionRequestCode: FitActionRequestCode) {
+        DLog.v("+")
         if (permissionApproved()) {
             fitSignIn(fitActionRequestCode)
         } else {
@@ -85,6 +89,8 @@ class MainActivity : AppCompatActivity() {
      * @param requestCode The request code corresponding to the action to perform after sign in.
      */
     private fun fitSignIn(requestCode: FitActionRequestCode) {
+        DLog.v("+")
+
         if (oAuthPermissionsApproved()) {
             performActionForRequestCode(requestCode)
         } else {
@@ -102,6 +108,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        DLog.v("+")
 
         when (resultCode) {
             RESULT_OK -> {
@@ -133,7 +140,7 @@ class MainActivity : AppCompatActivity() {
             Request code was: $requestCode
             Result code was: $resultCode
         """.trimIndent()
-        // Log.e(TAG, message)
+        DLog.v(message)
     }
 
     private fun oAuthPermissionsApproved() = GoogleSignIn.hasPermissions(getGoogleAccount(), fitnessOptions)
@@ -148,15 +155,17 @@ class MainActivity : AppCompatActivity() {
 
     /** Records step data by requesting a subscription to background step data.  */
     private fun subscribe() {
+        DLog.v("+")
+
         // To create a subscription, invoke the Recording API. As soon as the subscription is
         // active, fitness data will start recording.
         Fitness.getRecordingClient(this, getGoogleAccount())
             .subscribe(DataType.TYPE_STEP_COUNT_CUMULATIVE)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Log.i(TAG, "Successfully subscribed!")
+                    DLog.v("Successfully subscribed!")
                 } else {
-                    // Log.w(TAG, "There was a problem subscribing.", task.exception)
+                    DLog.v("There was a problem subscribing. ${task.exception}")
                 }
             }
     }
@@ -166,6 +175,8 @@ class MainActivity : AppCompatActivity() {
      * current timezone.
      */
     private fun readData() {
+        DLog.v("+")
+
         Fitness.getHistoryClient(this, getGoogleAccount())
             .readDailyTotal(DataType.TYPE_STEP_COUNT_DELTA)
             .addOnSuccessListener { dataSet ->
@@ -173,10 +184,10 @@ class MainActivity : AppCompatActivity() {
                     dataSet.isEmpty -> 0
                     else -> dataSet.dataPoints.first().getValue(Field.FIELD_STEPS).asInt()
                 }
-                // Log.i(TAG, "Total steps: $total")
+                DLog.v("Total steps: $total")
             }
             .addOnFailureListener { e ->
-                // Log.w(TAG, "There was a problem getting the step count.", e)
+                DLog.v("There was a problem getting the step count. $e")
             }
     }
 
@@ -187,6 +198,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        DLog.v("+")
+
         val id = item.itemId
         if (id == R.id.action_read_data) {
             fitSignIn(FitActionRequestCode.READ_DATA)
@@ -197,6 +210,8 @@ class MainActivity : AppCompatActivity() {
 
     /** Initializes a custom log class that outputs both to in-app targets and logcat.  */
     private fun initializeLogging() {
+        DLog.v("+")
+
         // Wraps Android's native log framework.
 //        val logWrapper = LogWrapper()
 //        // Using Log, front-end to the logging chain, emulates android.util.log method signatures.
@@ -214,16 +229,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun permissionApproved(): Boolean {
         val approved = if (runningQOrLater) {
+            DLog.v("+")
             PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACTIVITY_RECOGNITION)
         } else {
+            DLog.v("+")
             true
         }
         return approved
     }
 
     private fun requestRuntimePermissions(requestCode: FitActionRequestCode) {
+        DLog.v("+")
+
         val shouldProvideRationale =
             ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACTIVITY_RECOGNITION)
 
@@ -235,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this,
                     arrayOf(Manifest.permission.ACTIVITY_RECOGNITION),
                     requestCode.ordinal)
-                
+
 //                Snackbar.make(
 //                    findViewById(R.id.main_activity_view),
 //                    R.string.permission_rationale,
@@ -262,14 +281,16 @@ class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        DLog.v("+")
 
         when {
             grantResults.isEmpty() -> {
                 // If user interaction was interrupted, the permission request
                 // is cancelled and you receive empty arrays.
-                // Log.i(TAG, "User interaction was cancelled.")
+                DLog.v("User interaction was cancelled.")
             }
             grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
+                DLog.v("Permission was granted.")
                 // Permission was granted.
                 val fitActionRequestCode = FitActionRequestCode.values()[requestCode]
                 fitActionRequestCode.let {
@@ -277,6 +298,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             else -> {
+                DLog.v("Permission denied.")
                 // Permission denied.
 
                 // In this Activity we've chosen to notify the user that they
